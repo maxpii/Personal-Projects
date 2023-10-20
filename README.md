@@ -1,2 +1,2 @@
 # Personal-Projects
-Personal projects that I create over time while I learn new skills. Over the next few months, I plan to put a small restaurant webpage, something to do with APIs, and blackjack in java. 
+Personal projects that I create over time while I learn new skills. Over the next few months, I plan to put a small restaurant webpage, and something to do with python. 
