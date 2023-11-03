@@ -8,13 +8,18 @@ public class UnitConverter implements ActionListener{
 
     double[] metricToStates = {(1/25.4),2.2,(1/746.0),3.28};
     double[] statesToMetric = {25.4, (1/2.2), 746.0,(1/3.28)};
+
+    JLabel header;
+    boolean isString;
     JComboBox metricBox;
     JTextField metricTextField;
     JLabel metricLabel;
+    JLabel metricTitle;
+
     JComboBox  statesBox;
     JTextField statesTextField;
     JLabel statesLabel;
-
+    JLabel stateTitle;
     int METRIC_X = 100;
     int METRIC_Y = 50;
     int METRIC_WIDTH = 200;
@@ -33,6 +38,11 @@ public class UnitConverter implements ActionListener{
         frame.setResizable(false);
         frame.setLayout(null);
 
+        header = new JLabel();
+        header.setBounds(100,0,500,50);
+        header.setFont(new Font("Times New Roman",Font.BOLD,50));
+        header.setText("Unit Converter");
+
         // setting values of all the components
         metricBox = new JComboBox(metricUnits);
         statesBox = new JComboBox(statesUnits);
@@ -40,22 +50,30 @@ public class UnitConverter implements ActionListener{
         metricBox.addActionListener(this);
         statesBox.addActionListener(this);
 
-        metricBox.setBounds(METRIC_X,METRIC_Y,METRIC_WIDTH,METRIC_HEIGHT);
-        statesBox.setBounds(STATES_X,STATES_Y,STATES_WIDTH,STATES_HEIGHT);
+        metricBox.setBounds(METRIC_X  * 2,METRIC_Y + 100,METRIC_WIDTH,METRIC_HEIGHT);
+        statesBox.setBounds(STATES_X* 2,STATES_Y,STATES_WIDTH,STATES_HEIGHT);
 
         metricLabel = new JLabel();
-        metricLabel.setBounds(METRIC_X,METRIC_Y+75,1000,100);
+        metricLabel.setBounds(METRIC_X,METRIC_Y+175,1000,100);
         metricLabel.setText("answer: ");
+
+        metricTitle = new JLabel();
+        metricTitle.setBounds(METRIC_X + 90, METRIC_Y + 20, 1000,100);
+        metricTitle.setText("Metric to state equivalent");
+
+        stateTitle = new JLabel();
+        stateTitle.setBounds(STATES_X+80, STATES_Y- 75 , 1000,100);
+        stateTitle.setText("State to metric equivalent");
 
         statesLabel = new JLabel();
         statesLabel.setBounds(STATES_X,STATES_Y+75,1000,100);
         statesLabel.setText("answer: ");
 
         metricTextField = new JTextField();
-        metricTextField.setBounds(METRIC_X  * 3 + 20 , METRIC_Y + METRIC_Y/2 , 150,50);
+        metricTextField.setBounds(METRIC_X, METRIC_Y + 100, METRIC_WIDTH,METRIC_HEIGHT);
 
         statesTextField = new JTextField();
-        statesTextField.setBounds(STATES_X  * 3 + 20, STATES_Y + 20 , 150,50);
+        statesTextField.setBounds(STATES_X , STATES_Y, STATES_WIDTH,STATES_HEIGHT);
 
 
 
@@ -67,6 +85,9 @@ public class UnitConverter implements ActionListener{
         frame.add(statesLabel);
         frame.add(metricTextField);
         frame.add(statesTextField);
+        frame.add(metricTitle);
+        frame.add(stateTitle);
+        frame.add(header);
         frame.setVisible(true);
     }
 
@@ -77,10 +98,20 @@ public class UnitConverter implements ActionListener{
                 double num = 0;
                 try {
                     num = Double.parseDouble(text);
+                    isString = false;
                 } catch (Exception type) {
                     num = 0;
+                    isString = true;
                 }
-                metricLabel.setText("answer: " + Math.round((num*metricToStates[metricBox.getSelectedIndex()])) + " " + statesUnits[metricBox.getSelectedIndex()]);
+                if (num < 0) {
+                    metricLabel.setText("answer: No negatives allowed!");
+                }
+                else if (isString){
+                    metricLabel.setText("Stop entering characters other than numbers");
+                }
+                else {
+                    metricLabel.setText("answer: " + Math.round(num * metricToStates[metricBox.getSelectedIndex()]) + " " + statesUnits[metricBox.getSelectedIndex()]);
+                }
             }
         }
 
@@ -90,10 +121,20 @@ public class UnitConverter implements ActionListener{
                 double num = 0;
                 try {
                     num = Double.parseDouble(text);
+                    isString = false;
                 } catch (Exception type) {
                     num = 0;
+                    isString = true;
                 }
-                statesLabel.setText("answer: " + Math.round(num*statesToMetric[statesBox.getSelectedIndex()]) + " " + metricUnits[statesBox.getSelectedIndex()]);
+                if (num < 0) {
+                    statesLabel.setText("answer: No negatives allowed!");
+                }
+                else if (isString) {
+                    statesLabel.setText("Stop entering characters other than numbers");
+                }
+                else {
+                    statesLabel.setText("answer: " + Math.round(num * statesToMetric[statesBox.getSelectedIndex()]) + " " + metricUnits[statesBox.getSelectedIndex()]);
+                }
             }
         }
     }
