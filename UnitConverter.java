@@ -37,15 +37,18 @@ public class UnitConverter implements ActionListener{
         metricBox = new JComboBox(metricUnits);
         statesBox = new JComboBox(statesUnits);
 
+        metricBox.addActionListener(this);
+        statesBox.addActionListener(this);
+
         metricBox.setBounds(METRIC_X,METRIC_Y,METRIC_WIDTH,METRIC_HEIGHT);
         statesBox.setBounds(STATES_X,STATES_Y,STATES_WIDTH,STATES_HEIGHT);
 
         metricLabel = new JLabel();
-        metricLabel.setBounds(METRIC_X,METRIC_Y+75,100,100);
+        metricLabel.setBounds(METRIC_X,METRIC_Y+75,1000,100);
         metricLabel.setText("answer: ");
 
         statesLabel = new JLabel();
-        statesLabel.setBounds(STATES_X,STATES_Y+75,100,100);
+        statesLabel.setBounds(STATES_X,STATES_Y+75,1000,100);
         statesLabel.setText("answer: ");
 
         metricTextField = new JTextField();
@@ -68,8 +71,30 @@ public class UnitConverter implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == metricUnits && !metricTextField.getText().equals("")) {
+        if (e.getSource() == metricBox) {
+            String text = metricTextField.getText();
+            if (text.length() > 0) {
+                double num = 0;
+                try {
+                    num = Double.parseDouble(text);
+                } catch (Exception type) {
+                    num = 0;
+                }
+                metricLabel.setText("answer: " + Math.round((num*metricToStates[metricBox.getSelectedIndex()])) + " " + statesUnits[metricBox.getSelectedIndex()]);
+            }
+        }
 
+        if (e.getSource() == statesBox) {
+            String text = statesTextField.getText();
+            if (text.length() > 0) {
+                double num = 0;
+                try {
+                    num = Double.parseDouble(text);
+                } catch (Exception type) {
+                    num = 0;
+                }
+                statesLabel.setText("answer: " + Math.round(num*statesToMetric[statesBox.getSelectedIndex()]) + " " + metricUnits[statesBox.getSelectedIndex()]);
+            }
         }
     }
 
