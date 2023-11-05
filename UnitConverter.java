@@ -9,6 +9,9 @@ public class UnitConverter implements ActionListener{
     double[] metricToStates = {(1/25.4),2.2,(1/746.0),3.28};
     double[] statesToMetric = {25.4, (1/2.2), 746.0,(1/3.28)};
 
+    //Font answerFont = new Font("Fantasy", Font.BOLD, 20);
+    Font titleFont = new Font("Times New Roman", Font.ITALIC, 25);
+    //Font boxFont = new Font("Times new Roman", Font.BOLD, 20);
     JLabel header;
     boolean isString;
     JComboBox metricBox;
@@ -39,13 +42,16 @@ public class UnitConverter implements ActionListener{
         frame.setLayout(null);
 
         header = new JLabel();
-        header.setBounds(100,0,500,50);
+        header.setBounds(90,0,500,50);
         header.setFont(new Font("Times New Roman",Font.BOLD,50));
         header.setText("Unit Converter");
 
         // setting values of all the components
         metricBox = new JComboBox(metricUnits);
         statesBox = new JComboBox(statesUnits);
+
+        //metricBox.setBorder(new BorderLayout());
+        //statesBox.setFont(boxFont);
 
         metricBox.addActionListener(this);
         statesBox.addActionListener(this);
@@ -55,18 +61,23 @@ public class UnitConverter implements ActionListener{
 
         metricLabel = new JLabel();
         metricLabel.setBounds(METRIC_X,METRIC_Y+175,1000,100);
+        //metricLabel.setFont(answerFont);
         metricLabel.setText("answer: ");
 
+
         metricTitle = new JLabel();
-        metricTitle.setBounds(METRIC_X + 90, METRIC_Y + 20, 1000,100);
+        metricTitle.setBounds(METRIC_X, METRIC_Y + 20, 1000,100);
+        metricTitle.setFont(titleFont);
         metricTitle.setText("Metric to state equivalent");
 
         stateTitle = new JLabel();
-        stateTitle.setBounds(STATES_X+80, STATES_Y- 75 , 1000,100);
+        stateTitle.setBounds(STATES_X, STATES_Y- 75 , 1000,100);
+        stateTitle.setFont(titleFont);
         stateTitle.setText("State to metric equivalent");
 
         statesLabel = new JLabel();
         statesLabel.setBounds(STATES_X,STATES_Y+75,1000,100);
+        //statesLabel.setFont(answerFont);
         statesLabel.setText("answer: ");
 
         metricTextField = new JTextField();
