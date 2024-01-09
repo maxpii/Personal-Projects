@@ -1,2 +1,2 @@
 # Personal-Projects
-Personal projects that I create over time while I learn new skills. Over the next few months, I plan to put a small restaurant webpage, and something to do with python. 
+Many different Personal Projects that I created overtime. Although these are small, they are a reflection of the wide variety of skills I've learned and practiced overtime. Descriptions for these projects coming soon. 
