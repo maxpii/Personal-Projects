@@ -1,0 +1,2 @@
+<h1>GUI Connect Four</h1>
+<p>A connect four project, played with your keyboard using the number keys, that I made for the 2022-2023 SBHS Hackathon. Very simple project that is played with your keyboard. Not very creative nor note-worthy, but at least I was able to make it in time.</p>

@@ -12,10 +12,11 @@ public class ConnectFour extends JPanel implements KeyListener {
     JFrame frame;
     public ConnectFour() {
         frame = new JFrame("Connect Four");
-        frame.setSize(500,500);
+        frame.setSize(1500,1500);
         frame.add(this);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         frame.addKeyListener(this);
     }
     public void paintComponent(Graphics g) {
@@ -25,7 +26,18 @@ public class ConnectFour extends JPanel implements KeyListener {
         g2.fillRect(0,0,frame.getWidth(),frame.getHeight());
         g2.setColor(Color.BLACK);
         g2.setStroke(new BasicStroke(6));
-        for (int i = 0; i < board.length+2; i ++) {
+
+        if (turn == 1) {
+            g2.setColor(Color.RED);
+        }
+        else {
+            g2.setColor(Color.ORANGE);
+        }
+        g2.fillOval(frame.getWidth()/2-50,50,75,75);
+        g2.setColor(Color.WHITE);
+        g.setFont(new Font("Comic Sans",Font.BOLD,60));
+        g.drawString("Turn", frame.getWidth()/2+50,115);
+        /*for (int i = 0; i < board.length+2; i ++) {
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial",Font.PLAIN,50));
             if (i == 1) {
@@ -49,21 +61,21 @@ public class ConnectFour extends JPanel implements KeyListener {
             if (i == 7) {
                 g.drawString("G",200,i*100+70);
             }
-        }
+        }*/
         g.setColor(Color.WHITE);
         for (int i = 0; i < board.length; i ++) {
             for (int j = 0; j < board[0].length; j++) {
-                g2.drawRect(i*100+420,j*100+80,100,100);
+                g2.drawRect(i*100+450,j*100+140,100,100);
             }
         }
         for (int i = 0; i < board.length; i ++) {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] == 1) {
                     g2.setColor(Color.RED);
-                    g2.fillOval(i * 100 + 430, j * 100 + 90, 75, 75);
+                    g2.fillOval(i * 100 + 460, j * 100 + 150, 75, 75);
                 } else if (board[i][j] == 2) {
                     g2.setColor(Color.ORANGE);
-                    g2.fillOval(i * 100 + 430, j * 100 + 90, 75, 75);
+                    g2.fillOval(i * 100 + 460, j * 100 + 150, 75, 75);
                 }
             }
         }
@@ -264,7 +276,8 @@ public class ConnectFour extends JPanel implements KeyListener {
 
     }
     public boolean gameOver() {
-
+        
+        
        for (int i = 0; i < board.length; i ++) {
            for (int j = 0; j < board[0].length - 3; j ++) {
                if (board[i][j] != 0 && board[i][j] == board[i][j+1] && board[i][j] == board[i][j+2] && board[i][j] == board[i][j+3]) {
@@ -275,6 +288,35 @@ public class ConnectFour extends JPanel implements KeyListener {
         for (int i = 0; i < board.length; i ++) {
             for (int j = 0; j < board[0].length - 4; j ++) {
                 if (board[j][i] != 0 && board[j][i] == board[j+1][i] && board[j][i] == board[j+2][i] && board[j][i] == board[j+3][i]) {
+                    return true;
+                }
+            }
+        }
+
+        for (int row = 0; row < board.length - 2; row++) {
+            for (int col = 0; col < board.length - 2; col ++) {
+                if(board[row][col] != 0 && board[row][col] == board[row+1][col+1] && board[row][col] == board[row+2][col+2] && board[row][col] == board[row+3][col+3]) {
+                    return true;
+                }
+            }
+        }
+        for (int row = board.length - 1; row >= 2; row--) {
+            for (int col = 0; col < board.length - 2; col ++) {
+                if(board[row][col] != 0 && board[row][col] == board[row-1][col+1] && board[row][col] == board[row-2][col+2] && board[row][col] == board[row-3][col+3]) {
+                    return true;
+                }
+            }
+        }
+        for (int row = 0; row < board.length - 2; row++) {
+            for (int col = board.length - 1; col >= 2; col --) {
+                if(board[row][col] != 0 && board[row][col] == board[row+1][col-1] && board[row][col] == board[row+2][col-2] && board[row][col] == board[row+3][col-3]) {
+                    return true;
+                }
+            }
+        }
+        for (int row = board.length - 1; row >= 2; row--) {
+            for (int col = board.length - 1; col >= 2; col --) {
+                if(board[row][col] != 0 && board[row][col] == board[row-1][col-1] && board[row][col] == board[row-2][col-2] && board[row][col] == board[row-3][col-3]) {
                     return true;
                 }
             }

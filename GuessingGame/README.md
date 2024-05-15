@@ -1,0 +1,2 @@
+<h1>GUI guessing game</h1>
+<p>A small project that I made for my AP Computer Science A class. It makes a list of random values of a specified length, and the user has to guess values in that list. Not the most intuitive guessing game, the I had to use ArrayLists for this project</p>
