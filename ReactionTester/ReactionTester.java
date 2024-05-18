@@ -35,7 +35,7 @@ public class ReactionTester extends JFrame implements MouseListener{
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setBackground(Color.BLACK);
-
+        this.setLocationRelativeTo(null);
         // instantiating panel
         panel = new JPanel();
         panel.setBounds(PANEL_X, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT);
